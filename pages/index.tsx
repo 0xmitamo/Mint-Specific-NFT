@@ -1,5 +1,7 @@
-import { useAddress, useDisconnect, useMetamask } from '@thirdweb-dev/react';
-import type { NextPage } from 'next';
+import { Flex, Heading, Button } from "@chakra-ui/react";
+import { useAddress, useDisconnect, useMetamask } from "@thirdweb-dev/react";
+import type { NextPage } from "next";
+import Nfts from "../components/Nfts";
 
 const Home: NextPage = () => {
   const address = useAddress();
@@ -8,12 +10,16 @@ const Home: NextPage = () => {
   return (
     <div>
       {address ? (
-        <>
-          <button onClick={disconnectWallet}>Disconnect Wallet</button>
-          <p>Your address: {address}</p>
-        </>
+        <Flex mt="5rem" alignItems="center" flexDir="column">
+          <Heading mb="2.5rem">Select an NFT to Mint</Heading>
+          <Nfts />
+        </Flex>
       ) : (
-        <button onClick={connectWithMetamask}>Connect with Metamask</button>
+        <Flex mt="5rem" alignItems="center" flexDir="column">
+          <Button size="lg" colorScheme="blue" onClick={connectWithMetamask}>
+            Connect Metamask Wallet
+          </Button>
+        </Flex>
       )}
     </div>
   );
